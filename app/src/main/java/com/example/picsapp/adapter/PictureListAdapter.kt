@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.picsapp.ui.PictureListFragmentDirections
 import com.example.picsapp.databinding.ImageItemBinding
-import com.example.picsapp.databinding.PictureItemBinding
 import com.example.picsapp.model.LargeImageModel
 import com.example.picsapp.model.PixabayPicture
-import com.example.picsapp.utils.pixelsToDp
 
 class PictureListAdapter: RecyclerView.Adapter<PictureListAdapter.PictureListViewHolder>(){
 

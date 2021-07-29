@@ -14,7 +14,6 @@ class CategoryListFragment : Fragment() {
     private var _binding: FragmentCategoryListBinding? = null
     private val binding get() = _binding!!
 
-    //private val viewModel: CategoryListViewModel by viewModels()
     private lateinit var adapter: CategoryListAdapter
 
     override fun onCreateView(
