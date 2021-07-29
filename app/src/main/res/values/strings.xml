@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PicsApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- CategoryListFragment-->
+    <string name="category_name">Category</string>
+    <string name="category_list_title">Category List</string>
+
+    <!-- PictureFragment-->
+    <string name="button_text">Set as wallpaper</string>
+
+
+</resources>
