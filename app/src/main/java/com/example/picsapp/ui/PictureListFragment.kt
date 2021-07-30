@@ -49,10 +49,13 @@ class PictureListFragment : Fragment() {
     }
 
     private fun setData(){
+        //todo delete???
+        viewModel.pictureList.clear()
+        viewModel.getPicturesFromCategory(args.categoryName)
         viewModel.imageList.observe(requireActivity()){
             adapter.setData(it)
         }
-        viewModel.getPicturesFromCategory(args.categoryName)
+
     }
 
 }

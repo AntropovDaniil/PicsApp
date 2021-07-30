@@ -70,4 +70,8 @@ dependencies {
     //RoundedImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
+
+    //Paging3
+    implementation("androidx.paging:paging-runtime:3.0.1")
+
 }

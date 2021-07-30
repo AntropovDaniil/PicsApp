@@ -1,16 +1,31 @@
 package com.example.picsapp.ui
 
 import android.annotation.SuppressLint
+import android.app.WallpaperManager
+import android.content.ComponentName
+import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.service.wallpaper.WallpaperService
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import coil.ImageLoader
+import coil.clear
 import coil.load
+import coil.request.ImageRequest
 import com.example.picsapp.databinding.FragmentPictureBinding
 import com.example.picsapp.viewmodel.PictureViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PictureFragment : Fragment() {
 
@@ -46,7 +61,7 @@ class PictureFragment : Fragment() {
     @SuppressLint("ResourceType")
     private fun setListener(){
         binding.setWallpaperButton.setOnClickListener {
-            viewModel.setWallpaper(args.largeImage.largeImageUrl)
+            viewModel.setWallpaper(args.largeImage)
         }
     }
 }

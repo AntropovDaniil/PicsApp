@@ -19,7 +19,7 @@ class PictureListViewModel: ViewModel() {
         MutableLiveData<List<PixabayPicture>>()
     }
 
-    private val pictureList = mutableListOf<PixabayPicture>()
+    val pictureList = mutableListOf<PixabayPicture>()
 
     fun getPicturesFromCategory(categoryName: String){
         viewModelScope.launch(Dispatchers.IO) {
