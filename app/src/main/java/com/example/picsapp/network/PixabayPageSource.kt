@@ -21,24 +21,30 @@ class PixabayPageSource(
             LoadResult.Page(emptyList(), prevKey = null, nextKey = null)
         }
 
-        val page: Int = params.key ?: 1
-        val pageSize: Int = params.loadSize.coerceAtLeast(PixabayApi.MAX_PAGE_SIZE)
+        try{
+            val page: Int = params.key ?: 1
+            val pageSize: Int = params.loadSize.coerceAtLeast(PixabayApi.MAX_PAGE_SIZE)
 
-        val response = pixabayService.getPicturesFromCategory(categoryName, page =  page)
-        val pictureList = mutableListOf<PixabayPicture>()
+            val response = pixabayService.getPicturesFromCategory(categoryName, page =  page, pageSize = pageSize)
+            val pictureList = mutableListOf<PixabayPicture>()
 
-        if (response.isSuccessful) {
-            response.body()?.let {
-                for (picture in it.hits)
-                    pictureList.add(picture)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    for (picture in it.hits)
+                        pictureList.add(picture)
+                }
+                val nextKey = if (response.body()!!.hits.size < pageSize) null else page+1
+                val prevKey = if (page == 1) null else page-1
+
+                return LoadResult.Page(pictureList, prevKey = prevKey, nextKey = nextKey)
             }
-            val nextKey = if (pictureList.size < pageSize) null else page+1
-            val prevKey = if (page == 1) null else page-1
-
-            return LoadResult.Page(pictureList, prevKey = prevKey, nextKey = nextKey)
-        }
-        else {
-            return LoadResult.Error(HttpException(response))
+            else {
+                return LoadResult.Error(HttpException(response))
+            }
+        } catch (e: HttpException) {
+            return LoadResult.Error(e)
+        } catch (e: Exception) {
+            return LoadResult.Error(e)
         }
     }
 }

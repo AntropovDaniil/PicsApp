@@ -43,7 +43,7 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.CategoryList
 
     private fun initCategoryList(){
         for (category in Category.values()){
-            categoryList.add(category.categoryName.toString())
+            categoryList.add(category.categoryName)
         }
     }
 
