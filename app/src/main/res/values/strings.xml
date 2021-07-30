@@ -5,7 +5,6 @@
 
     <!-- CategoryListFragment-->
     <string name="category_name">Category</string>
-    <string name="category_list_title">Category List</string>
 
     <!-- PictureFragment-->
     <string name="button_text">Set as wallpaper</string>

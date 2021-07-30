@@ -62,6 +62,7 @@ class PictureFragment : Fragment() {
     private fun setListener(){
         binding.setWallpaperButton.setOnClickListener {
             viewModel.setWallpaper(args.largeImage)
+            Toast.makeText(requireContext(), "Wallpaper updated", Toast.LENGTH_SHORT).show()
         }
     }
 }

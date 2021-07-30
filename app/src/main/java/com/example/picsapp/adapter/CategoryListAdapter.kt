@@ -14,7 +14,7 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.CategoryList
     private var _rvBiding: CategoryItemBinding? = null
     private val rvBinding get() = _rvBiding!!
 
-    private val categoryList = mutableListOf<String>()
+    private val categoryList = mutableListOf<Category>()
 
     init {
         initCategoryList()
@@ -29,10 +29,14 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.CategoryList
     }
 
     override fun onBindViewHolder(holder: CategoryListViewHolder, position: Int) {
-        holder.binding.categoryName.text = categoryList[position]
+        val categoryName = categoryList[position].categoryName
+        val categoryIcon = categoryList[position].iconResource
+
+        holder.binding.categoryName.text = categoryName
+        holder.binding.categoryIcon.setImageResource(categoryIcon)
 
         holder.binding.categoryId.setOnClickListener {
-            val action = CategoryListFragmentDirections.actionCategoryListFragmentToPictureListFragment(categoryList[position].toLowerCase())
+            val action = CategoryListFragmentDirections.actionCategoryListFragmentToPictureListFragment(categoryName.toLowerCase())
             holder.itemView.findNavController().navigate(action)
         }
     }
@@ -43,9 +47,8 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.CategoryList
 
     private fun initCategoryList(){
         for (category in Category.values()){
-            categoryList.add(category.categoryName)
+            categoryList.add(category)
         }
     }
-
 
 }

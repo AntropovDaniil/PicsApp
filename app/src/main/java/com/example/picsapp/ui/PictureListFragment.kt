@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.picsapp.adapter.PictureListAdapter
 import com.example.picsapp.databinding.FragmentPictureListBinding
@@ -56,19 +58,14 @@ class PictureListFragment : Fragment() {
     }
 
     private fun setData(){
-//        //todo delete???
-//        viewModel.pictureList.clear()
-//        viewModel.getPicturesFromCategory(args.categoryName)
-//        viewModel.imageList.observe(requireActivity()){
-//            adapter.setData(it)
-//        }
-
+        adapter.addLoadStateListener { state ->
+            binding.pictureRv.isVisible = state.refresh != LoadState.Loading
+            binding.progress.isVisible = state.refresh == LoadState.Loading
+        }
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getPictureList(args.categoryName).collectLatest(
                 adapter::submitData
             )
         }
-
     }
-
 }
