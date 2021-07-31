@@ -26,10 +26,7 @@ class PictureListFragment : Fragment() {
     private var _binding: FragmentPictureListBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: PictureListViewModel by viewModels()//= ViewModelProvider(requireActivity()).get(PictureListViewModel::class.java)
-
-    //private val viewModel: PictureListViewModel by viewModels {viewModeProvider.get()}
-
+    private val viewModel: PictureListViewModel by viewModels()
     private val args by navArgs<PictureListFragmentArgs>()
 
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -64,15 +61,6 @@ class PictureListFragment : Fragment() {
             binding.pictureRv.isVisible = state.refresh != LoadState.Loading
             binding.progress.isVisible = state.refresh == LoadState.Loading
 
-//            if (state.refresh == LoadState.Loading)
-//                binding.progress.visibility = View.VISIBLE
-//            else if (state.refresh == Error("Network Error")) {
-//                binding.progress.visibility = View.VISIBLE
-//                Toast.makeText(context, "NetworkError", Toast.LENGTH_SHORT).show()
-//            }
-//            else binding.progress.visibility = View.GONE
-
-//            binding.progress.isVisible = state.refresh == Error("Network Error")
         }
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getPictureList(args.categoryName).collectLatest(
