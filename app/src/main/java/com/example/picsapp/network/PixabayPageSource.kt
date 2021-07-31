@@ -6,9 +6,10 @@ import com.example.picsapp.model.PixabayPicture
 import retrofit2.HttpException
 
 class PixabayPageSource(
-    private val pixabayService: PixabayApi,
     private val categoryName: String
 ): PagingSource<Int, PixabayPicture>() {
+
+    private val pixabayService = RetrofitInstance.pixabayApi
 
     override fun getRefreshKey(state: PagingState<Int, PixabayPicture>): Int? {
         val anchorPosition = state.anchorPosition ?: return null

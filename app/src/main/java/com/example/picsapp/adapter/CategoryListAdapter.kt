@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.picsapp.ui.CategoryListFragmentDirections
 import com.example.picsapp.databinding.CategoryItemBinding
 import com.example.picsapp.model.Category
-import java.util.*
 
 class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.CategoryListViewHolder>() {
 

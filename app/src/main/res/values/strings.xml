@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">PicsApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="category_list_fragment_name">Categories</string>
+    <string name="picture_list_fragment_name">Pictures</string>
+    <string name="picture_fragment_name">Wallpaper Preview</string>
 
     <!-- CategoryListFragment-->
     <string name="category_name">Category</string>

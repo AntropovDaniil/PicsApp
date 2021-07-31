@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.util.DisplayMetrics
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import coil.ImageLoader
@@ -32,7 +33,7 @@ class PictureViewModel(application: Application): AndroidViewModel(application) 
         viewModelScope.launch(Dispatchers.IO) {
             val drawable = imageLoader.execute(request).drawable
 
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.Main){
                 val wallpaperManager = WallpaperManager.getInstance(context)
 
                 val bitmap = (drawable as BitmapDrawable).bitmap
@@ -42,8 +43,8 @@ class PictureViewModel(application: Application): AndroidViewModel(application) 
                 val screenHeight = displayMetrics.heightPixels
                 wallpaperManager.suggestDesiredDimensions(screenWidth, screenHeight)
 
-                val imageWidth = bitmap.width //wallpaperManager.desiredMinimumWidth
-                val imageHeight = bitmap.height //wallpaperManager.desiredMinimumHeight
+                val imageWidth = bitmap.width
+                val imageHeight = bitmap.height
 
                 val horizontalScaleFactor: Float = imageWidth.toFloat()/screenWidth.toFloat()
                 val verticalScaleFactor: Float = imageHeight.toFloat()/screenHeight.toFloat()
@@ -53,14 +54,20 @@ class PictureViewModel(application: Application): AndroidViewModel(application) 
                 val finalWidth = (imageWidth/scaleFactor).toInt()
                 val finalHeight = (imageHeight/scaleFactor).toInt()
 
-                val screenBitmap = Bitmap.createScaledBitmap(bitmap, finalWidth, finalHeight, true)
+                val scaledBitmap = Bitmap.createScaledBitmap(
+                    bitmap,
+                    finalWidth,
+                    finalHeight,
+                    true)
 
                 try {
-                    wallpaperManager.setBitmap(screenBitmap)
+                    wallpaperManager.setBitmap(scaledBitmap)
+                    Toast.makeText(context, "Wallpaper updated", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception){
-                    Log.d("TEST_TAG", e.printStackTrace().toString())
+                    Toast.makeText(context, "Network Error", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
+
 }

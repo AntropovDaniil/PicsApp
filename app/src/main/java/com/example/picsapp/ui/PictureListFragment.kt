@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
+import androidx.paging.LoadState.Error
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.picsapp.adapter.PictureListAdapter
 import com.example.picsapp.databinding.FragmentPictureListBinding
@@ -61,6 +63,16 @@ class PictureListFragment : Fragment() {
         adapter.addLoadStateListener { state ->
             binding.pictureRv.isVisible = state.refresh != LoadState.Loading
             binding.progress.isVisible = state.refresh == LoadState.Loading
+
+//            if (state.refresh == LoadState.Loading)
+//                binding.progress.visibility = View.VISIBLE
+//            else if (state.refresh == Error("Network Error")) {
+//                binding.progress.visibility = View.VISIBLE
+//                Toast.makeText(context, "NetworkError", Toast.LENGTH_SHORT).show()
+//            }
+//            else binding.progress.visibility = View.GONE
+
+//            binding.progress.isVisible = state.refresh == Error("Network Error")
         }
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getPictureList(args.categoryName).collectLatest(

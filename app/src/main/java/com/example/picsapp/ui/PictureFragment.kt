@@ -20,6 +20,7 @@ import coil.ImageLoader
 import coil.clear
 import coil.load
 import coil.request.ImageRequest
+import com.example.picsapp.R
 import com.example.picsapp.databinding.FragmentPictureBinding
 import com.example.picsapp.viewmodel.PictureViewModel
 import kotlinx.coroutines.Dispatchers
@@ -55,14 +56,19 @@ class PictureFragment : Fragment() {
     }
 
     private fun setData(){
-        binding.imageView.load(args.largeImage.largeImageUrl)
+        binding.imageView
+            .load(args.largeImage.largeImageUrl){
+                placeholder(R.drawable.ic_empty_image)
+            }
     }
 
     @SuppressLint("ResourceType")
     private fun setListener(){
         binding.setWallpaperButton.setOnClickListener {
-            viewModel.setWallpaper(args.largeImage)
-            Toast.makeText(requireContext(), "Wallpaper updated", Toast.LENGTH_SHORT).show()
+            if (binding.imageView.drawable != null)
+                viewModel.setWallpaper(args.largeImage)
+            else
+                Toast.makeText(context, "Network Error", Toast.LENGTH_SHORT).show()
         }
     }
 }

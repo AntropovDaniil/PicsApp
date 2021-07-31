@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.example.picsapp.ui.CategoryListFragment"
-        android:label="fragment_category_list"
+        android:label="@string/category_list_fragment_name"
         tools:layout="@layout/fragment_category_list" >
         <action
             android:id="@+id/action_categoryListFragment_to_pictureListFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/pictureListFragment"
         android:name="com.example.picsapp.ui.PictureListFragment"
-        android:label="fragment_picture_list"
+        android:label="@string/picture_list_fragment_name"
         tools:layout="@layout/fragment_picture_list" >
         <action
             android:id="@+id/action_pictureListFragment_to_pictureFragment"
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/pictureFragment"
         android:name="com.example.picsapp.ui.PictureFragment"
-        android:label="fragment_picture"
+        android:label="@string/picture_fragment_name"
         tools:layout="@layout/fragment_picture" >
         <argument
             android:name="largeImage"

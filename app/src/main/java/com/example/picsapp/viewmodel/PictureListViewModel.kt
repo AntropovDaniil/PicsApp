@@ -4,15 +4,13 @@ import androidx.lifecycle.*
 import androidx.paging.*
 import com.example.picsapp.model.PixabayPicture
 import com.example.picsapp.network.PixabayPageSource
-import com.example.picsapp.network.RetrofitInstance
 import kotlinx.coroutines.flow.*
 
-class PictureListViewModel(
-): ViewModel() {
+class PictureListViewModel: ViewModel() {
 
     fun getPictureList(categoryName: String): Flow<PagingData<PixabayPicture>>{
         return Pager(config = PagingConfig(pageSize = 20),
-        pagingSourceFactory = {PixabayPageSource(RetrofitInstance.pixabayApi, categoryName)}).flow.cachedIn(viewModelScope)
+        pagingSourceFactory = {PixabayPageSource(categoryName)}).flow.cachedIn(viewModelScope)
     }
 
 }
